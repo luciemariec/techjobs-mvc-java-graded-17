@@ -31,21 +31,20 @@ public class SearchController {
     @PostMapping(value = "results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         ArrayList<Job> jobs = null;
-        if (searchType.equals("all")) {
+        if (searchType.equals("all")) { //Check if the searchType is "all"
             jobs = JobData.findByValue(searchTerm);
             model.addAttribute("title", "All Jobs");
         }
         else
-        {
+        { //if searchType is specific (not "all"), find jobs by a specific column and value
             jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             model.addAttribute("title", "Jobs with " +
                     ListController.columnChoices.get(searchType) + ": " + searchTerm);
         }
-        model.addAttribute("jobs", jobs);
-        model.addAttribute("columns", ListController.columnChoices);
-        model.addAttribute("searchType", searchType);
+        model.addAttribute("jobs", jobs); //add the list of jobs to the model
+        model.addAttribute("columns", ListController.columnChoices); //add the column choices to the model to populate the search form
+        model.addAttribute("searchType", searchType); //add the search type to the model
         return "search";
-        //return "redirect:/search";
     }
 }
 

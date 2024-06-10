@@ -19,12 +19,11 @@
   </tr>
   <tr>
     <!-- TODO #2: Complete the View Jobs By Category Table. -->
-
+//Table cell containing the 'View All' link
     <td>
       <a href="/list/jobs?column=all">View All</a>
     </td>
-    <!-- Feel free to remove or modify this element if necessary. -->
-
+//Table cell iterating over tableChoices to display categories and items
     <td th:each="category : ${tableChoices}">
       <ul>
         <li th:each="item : ${category.value}">
